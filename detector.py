@@ -20,7 +20,7 @@ class GroundTruthDetections:
         self._frames = int(self.all_dets[:, 1].max())+1 #0 to 4500 inclusive
 
     '''as in practical realtime MOT, the detector doesn't run on every single frame'''
-    def _do_detection(self, detect_prob = 1): # .4 default,  = 1 means always have detections
+    def _do_detection(self, detect_prob = .4): # .4 default,  = 1 means always have detections
 
         return int(np.random.choice(2, 1, p=[1 - detect_prob, detect_prob]))
 
@@ -28,8 +28,8 @@ class GroundTruthDetections:
     def get_detected_items(self,frame):
 
         if self._do_detection() or frame == 0:
-            return self.all_dets[self.all_dets[:, 1] == frame, 8:] # get all bboxes at frame 0
-            # return self.all_dets[self.all_dets[:, 1] == frame, 4:] # for inference
+            # return self.all_dets[self.all_dets[:, 1] == frame, 8:] # get all bboxes at frame 0
+            return self.all_dets[self.all_dets[:, 1] == frame, 4:] # for inference
         else:
             return []
 

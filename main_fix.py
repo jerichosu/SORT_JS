@@ -69,13 +69,13 @@ def main():
             _, img = cap.read()
             
             
-            # if (display):
-            #     ax1 = fig.add_subplot(111, aspect='equal')
-            #     ax1.imshow(img)
-            #     if(use_dlibTracker):
-            #         plt.title('Dlib Correlation Tracker')
-            #     else:
-            #         plt.title('Kalman Tracker')
+            if (display):
+                ax1 = fig.add_subplot(111, aspect='equal')
+                ax1.imshow(img)
+                if(use_dlibTracker):
+                    plt.title('Dlib Correlation Tracker')
+                else:
+                    plt.title('Kalman Tracker')
 
             start_time = time.time()
             #update tracker # tracker = Sort().update
@@ -91,28 +91,28 @@ def main():
             print('frame: %d...took: %3fs'%(frame,cycle_time))
             
 
-            # for d in trackers:
-            #     f_out.write('%d,%d,%d,%d,%.3f,%.3f,%.3f,%.3f\n' % (d[4], frame, 1, 1, d[0], d[1], d[2], d[3]))
-            #     if (display):
-            #         d = d.astype(np.int32)
-            #         ax1.add_patch(patches.Rectangle((d[0], d[1]), d[2] - d[0], d[3] - d[1], fill=False, lw=3,
-            #                                         ec=colours[d[4] % 32, :]))
-            #         # ax1.set_adjustable('box-forced')
-            #         ax1.set_adjustable('datalim')
-            #         #label
-            #         ax1.annotate('id = %d' % (d[4]), xy=(d[0], d[1]), xytext=(d[0], d[1]))
-            #         if detections != []:#detector is active in this frame
-            #             ax1.annotate(" DETECTOR", xy=(5, 45), xytext=(5, 45))
+            for d in trackers:
+                f_out.write('%d,%d,%d,%d,%.3f,%.3f,%.3f,%.3f\n' % (d[4], frame, 1, 1, d[0], d[1], d[2], d[3]))
+                if (display):
+                    d = d.astype(np.int32)
+                    ax1.add_patch(patches.Rectangle((d[0], d[1]), d[2] - d[0], d[3] - d[1], fill=False, lw=3,
+                                                    ec=colours[d[4] % 32, :]))
+                    # ax1.set_adjustable('box-forced')
+                    ax1.set_adjustable('datalim')
+                    #label
+                    ax1.annotate('id = %d' % (d[4]), xy=(d[0], d[1]), xytext=(d[0], d[1]))
+                    if detections != []:#detector is active in this frame
+                        ax1.annotate(" DETECTOR", xy=(5, 45), xytext=(5, 45))
 
-            # if (display):
-            #     plt.axis('off')
-            #     fig.canvas.flush_events()
-            #     plt.draw()
-            #     fig.tight_layout()
-            #     #save the frame with tracking boxes
-            #     if(saver):
-            #         fig.savefig("./frameOut/f%d.jpg"%(frame+1),dpi = 200)
-            #     ax1.cla()
+            if (display):
+                plt.axis('off')
+                fig.canvas.flush_events()
+                plt.draw()
+                fig.tight_layout()
+                #save the frame with tracking boxes
+                if(saver):
+                    fig.savefig("./frameOut/f%d.jpg"%(frame+1),dpi = 200)
+                ax1.cla()
 
 
     print("Total Tracking took: %.3f for %d frames or %.1f FPS"%(total_time,total_frames,total_frames/total_time))
