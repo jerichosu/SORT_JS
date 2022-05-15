@@ -6,7 +6,7 @@ Created on Tue Jan 18 11:07:05 2022
 """
 import numpy as np
 
-fname = 'output/townCentreOut.top'
+fname = 'output/townCentreOut.txt'
 # all_dets = np.loadtxt(fname, delimiter=',') #load detections
 
 all_dets = np.loadtxt(fname, delimiter=',') #load detections

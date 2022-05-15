@@ -11,8 +11,8 @@ see https://github.com/nwojke/deep_sort
 
 import numpy as np
 # from numba import jit
-# from scipy.optimize import linear_sum_assignment as linear_assignment
-from sklearn.utils.linear_assignment_ import linear_assignment
+from scipy.optimize import linear_sum_assignment as linear_assignment
+# from sklearn.utils.linear_assignment_ import linear_assignment
 
 
 # @jit
@@ -61,7 +61,8 @@ def associate_detections_to_trackers(detections,trackers,iou_threshold = 0.3):
   matched_indices = linear_assignment(-iou_matrix)
   
   # convert to numpy????
-  matched_indices = np.asarray(matched_indices)
+  # when using linear_sum_assignment as linear_assignment, it needs to be transposed
+  matched_indices = np.transpose(np.asarray(matched_indices))
 
   unmatched_detections = []
   for d,det in enumerate(detections):
