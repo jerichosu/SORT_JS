@@ -13,24 +13,24 @@ cap = cv2.VideoCapture('TownCentreXVID.mp4')
 
 
 
-def vis_result(img, results):
-    for res_i, res in enumerate(results):
-        label, conf, bbox = res[:3]
-        bbox = [int(i) for i in bbox]
-        if len(res) > 3:
-            reid_feat = res[4]
-            print("reid feat dim {}".format(len(reid_feat)))
+# def vis_result(img, results):
+#     for res_i, res in enumerate(results):
+#         label, conf, bbox = res[:3]
+#         bbox = [int(i) for i in bbox]
+#         if len(res) > 3:
+#             reid_feat = res[4]
+#             print("reid feat dim {}".format(len(reid_feat)))
 
-        color = label_color[opt.label_name.index(label)]
-        # show box
-        cv2.rectangle(img, (bbox[0], bbox[1]), (bbox[2], bbox[3]), color, 2)
-        # show label and conf
-        txt = '{}:{:.2f}'.format(label, conf)
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        txt_size = cv2.getTextSize(txt, font, 0.5, 2)[0]
-        cv2.rectangle(img, (bbox[0], bbox[1] - txt_size[1] - 2), (bbox[0] + txt_size[0], bbox[1] - 2), color, -1)
-        cv2.putText(img, txt, (bbox[0], bbox[1] - 2), font, 0.5, (255, 255, 255), thickness=1, lineType=cv2.LINE_AA)
-    return img
+#         color = label_color[opt.label_name.index(label)]
+#         # show box
+#         cv2.rectangle(img, (bbox[0], bbox[1]), (bbox[2], bbox[3]), color, 2)
+#         # show label and conf
+#         txt = '{}:{:.2f}'.format(label, conf)
+#         font = cv2.FONT_HERSHEY_SIMPLEX
+#         txt_size = cv2.getTextSize(txt, font, 0.5, 2)[0]
+#         cv2.rectangle(img, (bbox[0], bbox[1] - txt_size[1] - 2), (bbox[0] + txt_size[0], bbox[1] - 2), color, -1)
+#         cv2.putText(img, txt, (bbox[0], bbox[1] - 2), font, 0.5, (255, 255, 255), thickness=1, lineType=cv2.LINE_AA)
+#     return img
 
 
 
@@ -73,7 +73,7 @@ for n_of_frames in range(0, 4501):
         
         cv2.rectangle(frame, start_point, end_point, color, thickness)
       
-      
+        
         txt = '{}'.format(int(detections[i,0]))
         
         font = cv2.FONT_HERSHEY_SIMPLEX
@@ -85,7 +85,7 @@ for n_of_frames in range(0, 4501):
     
     cv2.imshow('frame',frame)
     
-    if cv2.waitKey(25) & 0xFF == ord('q'):
+    if cv2.waitKey(0) & 0xFF == ord('q'):
         cv2.destroyAllWindows()
         break
 

@@ -46,6 +46,9 @@ def iou(bb_test,bb_gt):
 def associate_detections_to_trackers(detections,trackers,iou_threshold = 0.3):
   """
   Assigns detections to tracked object (both represented as bounding boxes)
+  
+  detections: detected object ([xyxy]) at frame t+1
+  trackers: predicted object ([xyxy], x = Ax + Bu, NOT x_hat = Ax_hat + Bu + K(y - y_hat)!) at frame t+1
 
   Returns 3 lists of matches, unmatched_detections and unmatched_trackers
   """
